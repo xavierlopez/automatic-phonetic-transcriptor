@@ -24,40 +24,34 @@ def normalize(s):
 
 
 def application(environ, start_response):
-    status = '200 OK'
-    
+    status = '200 OK'    
     # Returns a dictionary in which the values are lists
     d = parse_qs(environ['QUERY_STRING'])
-    # As there can be more than one value for a variable then
-    # a list is provided as a default value.
-    texto = d.get('texto', [''])[0] # Returns the first age value
-    
     texto_normalizado = normalize(texto)
-
     text =transcribe(texto_normalizado)
-
-
+    
+    #preparing response
     response_headers = [('Content-type', 'text/html;charset=utf-8')]
     start_response(status, response_headers)
-
     return [text]
 
 
 
 def transcribe(oracion):
 	medida = len(oracion)
+	#different indicators
 	esp=0
 	n = 0
 	voc = 0
 	rasgo= 0
+	#subsiguiente vocal
 	vsigg=""
 	transcripcion ="" 
-
 
 	while (n < medida):
 		 
 		c = oracion[n]
-		impres ="" 	#sonido por sonido
+		impres ="" 	#qué imprimimos en pantalla
 		vsig=""
 		
 		if (n < medida-1):	 #si no es el ultimo caracter
