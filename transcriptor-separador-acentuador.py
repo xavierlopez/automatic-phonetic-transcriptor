@@ -7,9 +7,6 @@ from cgi import parse_qs, escape
 import sys
 
 
-
-
-
 def application(environ, start_response):
     status = '200 OK'
     origin = environ.get("HTTP_ORIGIN")
@@ -35,13 +32,7 @@ def application(environ, start_response):
     return [text]
 
 
-
-
-
-
-
-
-
+#input normalisation
 def normalize(s):
     s = s.lower()
     replacements = (
@@ -53,15 +44,16 @@ def normalize(s):
         ("ú", "U"),
         ("ð", "D"),
         ("ñ", "9"),
-        ("ü", "8"),
-        
-        
+        ("ü", "8"),        
     )
     for a, b in replacements:
         s = s.replace(a, b).replace(a.upper(), b.upper())
     print("*",s)
     return s
 
+
+
+#output
 def denormalize(s):
     replacements = (
         ("X", "tʃ"),
@@ -77,12 +69,11 @@ def denormalize(s):
         ("9", "ɲ"),
         ("R", "ř"),
         ("Z", "θ"),
-		("M", "ɱ"),
+	("M", "ɱ"),
         ("N", "ŋ"),
         ("B", "β"),
         ("9", "ɲ"),
         ("8", "ü")
-
     )
     for a, b in replacements:
         s = s.replace(a, b).replace(a.upper(), b.upper())
@@ -279,13 +270,11 @@ def acentuaysepara(s):
 				if (len(word) > 1 and (not tonica_encontrada)): #si no es monosilabbo
 					if re.findall(r"[rlZdD]$", word[-1]):  #si la ultima silaba acaba en consonante
 						word[-1]="'"+word[-1]
-						tonica_encontrada=1
-						print("------222---------")
+						tonica_encontrada=1	
 
 					elif not (tonica_encontrada):
 						word[-2]="'"+word[-2]
-						tonica_encontrada=1	
-						print("----111111-------")					
+						tonica_encontrada=1					
 				
 				if ( len(word)==1 and re.findall("ir|ba|Ba",word[0]) ):
 					word[0]="'"+word[0]
@@ -303,7 +292,6 @@ def acentuaysepara(s):
 		word=[]
 		
 	return frase_string
-
 
 
 
@@ -366,8 +354,7 @@ def transcribe(oracion):
 
 		if (c == " "):
 			impres=" "
-			
-			
+				
 			
 		if (c == "a"):
 			impres=  "a"
