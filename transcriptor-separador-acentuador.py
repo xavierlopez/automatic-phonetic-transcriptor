@@ -22,14 +22,13 @@ def application(environ, start_response):
     text_transcrito =transcribe(texto_normalizado)
     text_separado = acentuaysepara(text_transcrito)
     text = denormalize(text_separado)
-
-
-    
+ 
     response_headers = [('Content-type', 'text/html;charset=utf-8'), ('Access-Control-Allow-Origin','*')]
 
     start_response(status, response_headers)
  
     return [text]
+
 
 
 #input normalisation
@@ -306,7 +305,6 @@ def transcribe(oracion):
 	vant= " "
 	transcripcion ="" 
 
-
 	while (n < medida):
 		 
 		c = oracion[n]
@@ -443,7 +441,6 @@ def transcribe(oracion):
 			rasgo = "f"
 
 
-
 		if (c == "g"):
 			if (vsig == "a" or vsig == "á"):
 
@@ -501,8 +498,6 @@ def transcribe(oracion):
 				rasgo = "g"
 
 
-		#if (c == "h"):
-			#do nothing
 
 		if (c == "i"):
 			if ( (rasgo == "vocal") or (re.findall("[aeiouAEIOU]", vsig)) ):
@@ -719,8 +714,7 @@ def transcribe(oracion):
 				impres=  "y"     	  
 				
 			esps = 0
-			
-				
+						
 			
 		if (c == "z"):
 				impres="Z"
@@ -730,7 +724,6 @@ def transcribe(oracion):
 				voc = 0			
 	
 						
-
 		n=n+1
 		transcripcion = transcripcion+impres
 	
