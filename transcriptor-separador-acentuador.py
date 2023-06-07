@@ -11,11 +11,9 @@ def application(environ, start_response):
     status = '200 OK'
     origin = environ.get("HTTP_ORIGIN")
     
-    # Returns a dictionary in which the values are lists
+
     d = parse_qs(environ['QUERY_STRING'])
-    # As there can be more than one value for a variable then
-    # a list is provided as a default value.
-    texto = d.get('texto', [''])[0] # Returns the first value
+    texto = d.get('texto', [''])[0] 
     
     texto_normalizado = normalize(texto)
 
